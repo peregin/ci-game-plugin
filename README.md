@@ -20,6 +20,16 @@ Note that the plugin version 1.13+ requires Hudson 1.320 to work and the followi
 
 The plugin is not activated for all jobs at start, each separate job has to activate the game. The game can also be de-activated in one job if some large merge activity is going to take place. To activate the game for a job, go to the job configuration page, click "Add post-build action" and select "Continuous integration game" from the list of available post-build actions.
 
+To activate the plugin in a pipeline add it as a build step, for example in the post section:
+
+```
+post {
+    always {
+        ciGame()
+    }
+}
+``` 
+
 ####Build score card
 For each build the game calculates, according to the rules, the number of points that it is worth. Each user that is responsible for the build (ie comitters) receives the points.
 

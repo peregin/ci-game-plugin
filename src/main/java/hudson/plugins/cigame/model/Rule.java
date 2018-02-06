@@ -1,6 +1,6 @@
 package hudson.plugins.cigame.model;
 
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 
 /**
  * Rule interface.
@@ -21,5 +21,5 @@ public interface Rule {
      * @param build build to calculate points for
      * @return the result of the rule; null if the rule should be ignored.
      */
-    RuleResult evaluate(AbstractBuild<?, ?> build);
+    RuleResult evaluate(Run<?, ?> build);
 }

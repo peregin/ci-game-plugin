@@ -2,8 +2,8 @@ package hudson.plugins.cigame.rules.unittesting;
 
 import java.util.Collection;
 
-import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.model.Run;
 import hudson.plugins.cigame.model.AggregatableRule;
 import hudson.plugins.cigame.model.RuleResult;
 import hudson.tasks.test.AbstractTestResultAction;
@@ -41,7 +41,7 @@ public abstract class AbstractUnitTestsRule implements AggregatableRule<Integer>
      *
      * @return the previous build or null if no such build was found
      */
-    private AbstractBuild<?, ?> getPreviousBuildWithResults(AbstractBuild<?, ?> previousBuild) {
+    private Run<?, ?> getPreviousBuildWithResults(Run<?, ?> previousBuild) {
         while(previousBuild != null) {
         	if (previousBuild.getResult() != null) {
 	            if (previousBuild.getResult().isBetterThan(Result.FAILURE)) {
@@ -64,8 +64,8 @@ public abstract class AbstractUnitTestsRule implements AggregatableRule<Integer>
     }
     
     @SuppressWarnings("unchecked")
-	public final RuleResult<Integer> evaluate(AbstractBuild<?, ?> previousBuild,
-			AbstractBuild<?, ?> build) {
+	public final RuleResult<Integer> evaluate(Run<?, ?> previousBuild,
+			Run<?, ?> build) {
 
         previousBuild = getPreviousBuildWithResults(previousBuild);
 
@@ -129,7 +129,7 @@ public abstract class AbstractUnitTestsRule implements AggregatableRule<Integer>
         return null;
 	}
     
-	public final RuleResult<Integer> evaluate(AbstractBuild<?, ?> build) {
+	public final RuleResult<Integer> evaluate(Run<?, ?> build) {
 		throw new UnsupportedOperationException();
 	}
 	

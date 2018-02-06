@@ -1,30 +1,30 @@
 package hudson.plugins.cigame;
 
-import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
-import static org.hamcrest.CoreMatchers.*;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
-import hudson.model.AbstractBuild;
-import hudson.model.Action;
-import hudson.model.User;
+import hudson.model.*;
 import hudson.plugins.cigame.model.Rule;
 import hudson.plugins.cigame.model.RuleBook;
 import hudson.plugins.cigame.model.RuleResult;
 import hudson.plugins.cigame.model.RuleSet;
 import hudson.scm.ChangeLogSet;
 import hudson.scm.ChangeLogSet.Entry;
-
+import hudson.util.StreamTaskListener;
 import org.junit.Test;
 import org.jvnet.hudson.test.Bug;
 import org.mockito.Mockito;
 
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
+import static org.mockito.Mockito.*;
+
 @SuppressWarnings("unchecked")
 public class GamePublisherTest {
+
+    private final TaskListener listener = new StreamTaskListener(System.out, Charset.forName("UTF-8"));
 
     @Test
     public void assertScoreCardActionIsAddedToBuild() throws Exception {
@@ -47,8 +47,7 @@ public class GamePublisherTest {
         AbstractBuild build = mock(AbstractBuild.class);
         UserScoreProperty userScoreProperty = new UserScoreProperty(10, true, null);
         mockChangeSetInBuild(build, createUser(userScoreProperty));
-
-        assertThat(new GamePublisher().perform(build, createRuleBook(5d), true, null), is(true));
+        assertThat(new GamePublisher().perform(build, createRuleBook(5d), true, listener), is(true));
         assertThat(userScoreProperty.getScore(), is(15d));
     }
 
@@ -139,7 +138,7 @@ public class GamePublisherTest {
             this.ruleResult = ruleResult;
         }
 
-        public RuleResult evaluate(AbstractBuild<?, ?> build) {
+        public RuleResult evaluate(Run<?, ?> build) {
             return ruleResult;
         }
 

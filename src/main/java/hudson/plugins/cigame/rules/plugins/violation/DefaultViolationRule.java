@@ -2,8 +2,8 @@ package hudson.plugins.cigame.rules.plugins.violation;
 
 import java.util.List;
 
-import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.model.Run;
 import hudson.plugins.cigame.model.Rule;
 import hudson.plugins.cigame.model.RuleResult;
 import hudson.plugins.cigame.util.ActionSequenceRetriever;
@@ -25,7 +25,7 @@ public class DefaultViolationRule implements Rule {
         this.pointsForRemovingViolation = pointsForRemovingViolation;
     }
 
-    public RuleResult evaluate(AbstractBuild<?, ?> build) {
+    public RuleResult evaluate(Run<?, ?> build) {
         if (new ResultSequenceValidator(Result.UNSTABLE, 2).isValid(build)) {
             List<List<ViolationsBuildAction>> actionList = new ActionSequenceRetriever<ViolationsBuildAction>(ViolationsBuildAction.class, 2).getSequence(build);
             if ((actionList != null)

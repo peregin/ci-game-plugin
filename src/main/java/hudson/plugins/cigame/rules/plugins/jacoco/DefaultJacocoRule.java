@@ -3,7 +3,7 @@ package hudson.plugins.cigame.rules.plugins.jacoco;
 import static java.lang.Math.ceil;
 import static java.lang.Math.floor;
 import hudson.model.Result;
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.cigame.model.AggregatableRule;
 import hudson.plugins.cigame.model.RuleResult;
 import hudson.plugins.cigame.util.ActionRetriever;
@@ -56,8 +56,8 @@ public class DefaultJacocoRule implements AggregatableRule<Double> {
     }
 
     @Override
-    public RuleResult<Double> evaluate(AbstractBuild<?, ?> previousBuild,
-        AbstractBuild<?, ?> build) {
+    public RuleResult<Double> evaluate(Run<?, ?> previousBuild,
+        Run<?, ?> build) {
 
         if (build == null ||
             build.getResult() == null ||
@@ -109,7 +109,7 @@ public class DefaultJacocoRule implements AggregatableRule<Double> {
     }
 
     @Override
-    public RuleResult<Double> evaluate(AbstractBuild<?, ?> build) {
+    public RuleResult<Double> evaluate(Run<?, ?> build) {
         throw new UnsupportedOperationException();
     }
 

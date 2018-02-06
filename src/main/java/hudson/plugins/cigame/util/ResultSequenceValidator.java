@@ -1,7 +1,7 @@
 package hudson.plugins.cigame.util;
 
-import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.model.Run;
 
 /**
  * Class that simplifies checking if a build sequence is above a certain result threshold.
@@ -23,7 +23,7 @@ public class ResultSequenceValidator {
      * @param build latest build in sequence
      * @return true, if the build sequence conforms to the requirements set in constructor; false, otherwise.
      */
-    public boolean isValid(AbstractBuild<?,?> build) {
+    public boolean isValid(Run<?,?> build) {
         int buildCount = 0;
         while (buildCount < sequenceLength) {
             if ((build == null) || build.getResult().isWorseThan(resultThreshold)) {

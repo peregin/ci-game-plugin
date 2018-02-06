@@ -1,7 +1,7 @@
 package hudson.plugins.cigame.rules.build;
 
-import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.model.Run;
 import hudson.plugins.cigame.model.Rule;
 import hudson.plugins.cigame.model.RuleResult;
 
@@ -26,7 +26,7 @@ public class BuildResultRule implements Rule {
         return Messages.BuildRuleSet_BuildResult(); //$NON-NLS-1$
     }
 
-    public RuleResult evaluate(AbstractBuild<?, ?> build) {
+    public RuleResult evaluate(Run<?, ?> build) {
         Result result = build.getResult();
         Result lastResult = null;
         if (build.getPreviousBuild() != null) {

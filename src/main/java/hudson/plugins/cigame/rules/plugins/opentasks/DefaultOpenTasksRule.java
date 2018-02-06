@@ -1,8 +1,8 @@
 package hudson.plugins.cigame.rules.plugins.opentasks;
 
 import hudson.maven.MavenBuild;
-import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.model.Run;
 import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.cigame.model.AggregatableRule;
 import hudson.plugins.cigame.model.RuleResult;
@@ -51,8 +51,8 @@ public class DefaultOpenTasksRule implements AggregatableRule<Integer> {
 	}
 
 	@Override
-	public RuleResult<Integer> evaluate(AbstractBuild<?, ?> previousBuild,
-			AbstractBuild<?, ?> build) {
+	public RuleResult<Integer> evaluate(Run<?, ?> previousBuild,
+			Run<?, ?> build) {
 		if (build != null && build.getResult() != null && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
     		return RuleResult.EMPTY_INT_RESULT;
     	}
@@ -94,7 +94,7 @@ public class DefaultOpenTasksRule implements AggregatableRule<Integer> {
         return RuleResult.EMPTY_INT_RESULT;
 	}
 
-	public RuleResult<Integer> evaluate(AbstractBuild<?, ?> build) {
+	public RuleResult<Integer> evaluate(Run<?, ?> build) {
 		throw new UnsupportedOperationException();
 //        if (new ResultSequenceValidator(Result.UNSTABLE, 2).isValid(build)) {
 //            List<List<TasksResultAction>> actionSequence = new ActionSequenceRetriever<TasksResultAction>(TasksResultAction.class, 2).getSequence(build);

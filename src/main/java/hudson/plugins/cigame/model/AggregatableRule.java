@@ -1,6 +1,6 @@
 package hudson.plugins.cigame.model;
 
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 
 import java.util.Collection;
 
@@ -31,12 +31,12 @@ public interface AggregatableRule<T> extends Rule {
      * @param build the current build (may be null!)
      * @return the rule result or null, if no points should be awarded
      */
-    RuleResult<T> evaluate(AbstractBuild<?, ?> previousBuild, AbstractBuild<?, ?> build);
+    RuleResult<T> evaluate(Run<?, ?> previousBuild, Run<?, ?> build);
 
     /**
-     * @deprecated this rule is not called at all for {@link AggregatableRule}s.
-     * Please implement {@link #evaluate(AbstractBuild, AbstractBuild)} instead!
+     * @deprecated this rule is not called at all for {@link Run}s.
+     * Please implement {@link #evaluate(Run, Run)} instead!
      */
     @Deprecated
-	RuleResult<T> evaluate(AbstractBuild<?, ?> build);
+	RuleResult<T> evaluate(Run<?, ?> build);
 }

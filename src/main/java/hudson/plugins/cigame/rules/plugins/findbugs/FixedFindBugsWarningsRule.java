@@ -1,6 +1,6 @@
 package hudson.plugins.cigame.rules.plugins.findbugs;
 
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.cigame.model.RuleResult;
 import java.util.Collection;
@@ -45,7 +45,7 @@ public class FixedFindBugsWarningsRule extends AbstractFindBugsWarningsRule {
         return EMPTY_RESULT;
 	}
     
-    public RuleResult<Integer> evaluate(AbstractBuild<?, ?> build) {
+    public RuleResult<Integer> evaluate(Run<?, ?> build) {
     	throw new UnsupportedOperationException();
 //        int numberOfAnnotations = 0;
 //        if (new ResultSequenceValidator(Result.UNSTABLE, 2).isValid(build)) {

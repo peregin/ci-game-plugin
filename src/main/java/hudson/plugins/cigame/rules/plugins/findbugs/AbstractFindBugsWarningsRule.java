@@ -3,8 +3,8 @@ package hudson.plugins.cigame.rules.plugins.findbugs;
 import java.util.List;
 
 import hudson.maven.MavenBuild;
-import hudson.model.AbstractBuild;
 import hudson.model.Result;
+import hudson.model.Run;
 import hudson.plugins.analysis.util.model.Priority;
 import hudson.plugins.cigame.model.AggregatableRule;
 import hudson.plugins.cigame.model.RuleResult;
@@ -48,8 +48,8 @@ public abstract class AbstractFindBugsWarningsRule implements AggregatableRule<I
     }
     
 	@Override
-	public final RuleResult<Integer> evaluate(AbstractBuild<?, ?> previousBuild,
-			AbstractBuild<?, ?> build) {
+	public final RuleResult<Integer> evaluate(Run<?, ?> previousBuild,
+			Run<?, ?> build) {
     	if (build != null && build.getResult() != null && build.getResult().isWorseOrEqualTo(Result.FAILURE)) {
     		return EMPTY_RESULT;
     	}
@@ -82,7 +82,7 @@ public abstract class AbstractFindBugsWarningsRule implements AggregatableRule<I
 		}
 	}
 
-	private RuleResult<Integer> evaluateMaven(AbstractBuild<?, ?> previousBuild, AbstractBuild<?, ?> build) {
+	private RuleResult<Integer> evaluateMaven(Run<?, ?> previousBuild, Run<?, ?> build) {
 		List<FindBugsMavenResultAction> currentActions = ActionRetriever.getResult(build, Result.UNSTABLE,
 				FindBugsMavenResultAction.class);
 		int currentAnnotations = getNumberOfMavenAnnotations(currentActions);

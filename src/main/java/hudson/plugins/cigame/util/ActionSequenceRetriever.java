@@ -3,8 +3,8 @@ package hudson.plugins.cigame.util;
 import java.util.ArrayList;
 import java.util.List;
 
-import hudson.model.AbstractBuild;
 import hudson.model.Action;
+import hudson.model.Run;
 
 /**
  * Utility class to retrieve a list of actions from a build seequence.
@@ -29,7 +29,7 @@ public class ActionSequenceRetriever<T extends Action>  {
      * @param build latest build
      * @return a list of actions, or null if there was not enough builds or a build does not contain the action
      */
-    public List<List<T>> getSequence(AbstractBuild<?,?> build) {
+    public List<List<T>> getSequence(Run<?,?> build) {
         List<List<T>> actionSequence = new ArrayList<List<T>>();
         int buildCount = 0;
         while ((build != null)

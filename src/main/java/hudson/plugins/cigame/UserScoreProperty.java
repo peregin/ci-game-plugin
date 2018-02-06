@@ -2,9 +2,8 @@ package hudson.plugins.cigame;
 
 import com.google.common.annotations.VisibleForTesting;
 import com.google.common.base.Objects;
-import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
-import hudson.model.AbstractBuild;
+import hudson.model.Run;
 import hudson.plugins.cigame.model.ScoreHistoryEntry;
 import org.kohsuke.stapler.DataBoundConstructor;
 import org.kohsuke.stapler.export.Exported;
@@ -65,7 +64,7 @@ public class UserScoreProperty extends UserProperty {
         return !isNotParticipatingInGame;
     }
 
-    public void rememberAccountableBuilds(List<AbstractBuild<?, ?>> accountableBuilds, double score) {
+    public void rememberAccountableBuilds(List<Run<?, ?>> accountableBuilds, double score) {
         this.addScoreHistoryEntry(ScoreHistoryEntry.fromScoreAward(accountableBuilds, score));
     }
 
