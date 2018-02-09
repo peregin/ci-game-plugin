@@ -31,9 +31,6 @@ public class ChangeLogRetriever {
     public static List<User> getChangeLogUsers(final Run<?, ?> run) {
         if (run instanceof AbstractBuild<?, ?>) {
             ChangeLogSet<? extends ChangeLogSet.Entry> changeLogSet = ((AbstractBuild<?, ?>) run).getChangeSet();
-            if (changeLogSet == null) {
-
-            }
             return changeLogSet == null ? new ArrayList<User>() : map(changeLogSet);
         } else {
             List<User> users = new ArrayList<User>();
