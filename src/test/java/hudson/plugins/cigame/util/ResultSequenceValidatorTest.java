@@ -46,4 +46,11 @@ public class ResultSequenceValidatorTest {
         when(previousBuild.getResult()).thenReturn(Result.UNSTABLE);
         assertThat(new ResultSequenceValidator(Result.UNSTABLE, 2).isValid(build), is(true));
     }
+
+    @Test
+    public void assertNullResultIsNotValidated() {
+        AbstractBuild build = mock(AbstractBuild.class);
+        when(build.getResult()).thenReturn(null);
+        assertThat(new ResultSequenceValidator(Result.SUCCESS, 1).isValid(build), is(false));
+    }
 }

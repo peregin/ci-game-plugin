@@ -26,7 +26,7 @@ public class ResultSequenceValidator {
     public boolean isValid(Run<?,?> build) {
         int buildCount = 0;
         while (buildCount < sequenceLength) {
-            if ((build == null) || build.getResult().isWorseThan(resultThreshold)) {
+            if ((build == null) || build.getResult() == null || build.getResult().isWorseThan(resultThreshold)) {
                 return false;
             }
             build = build.getPreviousBuild();
